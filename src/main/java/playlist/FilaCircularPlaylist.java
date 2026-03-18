@@ -1,9 +1,15 @@
-package estrutura.dados;
+package playlist;
 
 public class FilaCircularPlaylist {
     private Nodo head;
     private Nodo tail;
     private int tamanho;
+
+    public FilaCircularPlaylist() {
+        this.head = null;
+        this.tail = null;
+        this.tamanho = 0;
+    }
 
     public Nodo getHead() {
         return head;
@@ -15,12 +21,6 @@ public class FilaCircularPlaylist {
 
     public int getTamanho() {
         return tamanho;
-    }
-
-    public FilaCircularPlaylist() {
-        this.head = null;
-        this.tail = null;
-        this.tamanho = 0;
     }
 
     public boolean isEmpty() {
@@ -78,9 +78,15 @@ public class FilaCircularPlaylist {
 
         if (posicao == 0) {
             Nodo novoNodo = new Nodo(musica);
-            novoNodo.setProximo(head);
-            tail.setProximo(novoNodo);
-            head = novoNodo;
+            if (isEmpty()) {
+                head = novoNodo;
+                tail = novoNodo;
+                novoNodo.setProximo(novoNodo);
+            } else {
+                novoNodo.setProximo(head);
+                tail.setProximo(novoNodo);
+                head = novoNodo;
+            }
             tamanho++;
             return;
         }
@@ -122,7 +128,8 @@ public class FilaCircularPlaylist {
         System.out.println("Primeiro elemento: " + head.getMusica());
         System.out.println("Último elemento: " + tail.getMusica());
         System.out.println("O último elemento aponta para: " + tail.getProximo().getMusica());
-        System.out.println("Verificação de circularidade: " + (tail.getProximo() == head ? "OK (último -> primeiro)" : "ERRO"));
+        System.out.println(
+                "Verificação de circularidade: " + (tail.getProximo() == head ? "OK (último -> primeiro)" : "ERRO"));
         System.out.println();
     }
 

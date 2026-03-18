@@ -1,4 +1,4 @@
-package estrutura.dados;
+package playlist;
 
 public class Nodo {
     private Musica musica;
