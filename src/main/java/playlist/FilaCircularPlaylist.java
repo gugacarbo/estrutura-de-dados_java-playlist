@@ -101,6 +101,31 @@ public class FilaCircularPlaylist {
         tamanho++;
     }
 
+    public Musica removeAt(int posicao) {
+        if (posicao < 0 || posicao >= tamanho) {
+            throw new IllegalArgumentException("Posição inválida.");
+        }
+
+        if (posicao == 0) {
+            return dequeue();
+        }
+
+        Nodo atual = head;
+        for (int i = 0; i < posicao - 1; i++) {
+            atual = atual.getProximo();
+        }
+
+        Musica musicaRemovida = atual.getProximo().getMusica();
+        atual.setProximo(atual.getProximo().getProximo());
+
+        if (posicao == tamanho - 1) {
+            tail = atual;
+        }
+
+        tamanho--;
+        return musicaRemovida;
+    }
+
     public void printPlaylist() {
         if (isEmpty()) {
             System.out.println("Playlist está vazia.");
@@ -133,28 +158,4 @@ public class FilaCircularPlaylist {
         System.out.println();
     }
 
-    public Musica removeAt(int posicao) {
-        if (posicao < 0 || posicao >= tamanho) {
-            throw new IllegalArgumentException("Posição inválida.");
-        }
-
-        if (posicao == 0) {
-            return dequeue();
-        }
-
-        Nodo atual = head;
-        for (int i = 0; i < posicao - 1; i++) {
-            atual = atual.getProximo();
-        }
-
-        Musica musicaRemovida = atual.getProximo().getMusica();
-        atual.setProximo(atual.getProximo().getProximo());
-
-        if (posicao == tamanho - 1) {
-            tail = atual;
-        }
-
-        tamanho--;
-        return musicaRemovida;
-    }
 }

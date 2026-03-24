@@ -50,7 +50,5 @@ public class Main {
         System.out.println("10. Verificar se a playlist está vazia: " + playlist.isEmpty());
         System.out.println("11. Tamanho da playlist: " + playlist.size());
         System.out.println();
-
-        System.out.println("=== Demo concluída ===");
     }
 }
